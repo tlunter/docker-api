@@ -356,7 +356,10 @@ describe Docker::Image do
 
     it 'materializes each Image into a Docker::Image', :vcr do
       expect(subject.search('term' => 'sshd')).to be_all { |image|
-        !image.id.nil? && image.is_a?(described_class)
+        !image.id.nil? && image.is_a?(described_class) &&
+            image.info.has_key?('is_trusted') &&
+            image.info.has_key?('is_official') &&
+            image.info.has_key?('star_count')
       }
     end
   end
