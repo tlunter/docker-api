@@ -19,6 +19,6 @@ module Docker::Base
   # The docker-api will some time return "ID" other times it will return "Id"
   # and other times it will return "id". This method normalize it to "id"
   def normalize_hash(hash)
-    hash["id"] ||= hash.delete("ID") || hash.delete("Id")
+    hash["id"] ||= hash.delete("ID") || hash.delete("Id") || hash.delete("name")
   end
 end
